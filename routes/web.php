@@ -28,9 +28,10 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/dashboard', 'Web\DashboardController@index')->name('dashboard');
+Route::get('/pwd', 'Web\ManageLinesController@index');
 
 
-Route::group(['prefix' => 'messages'], function () {
+Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
     Route::get('/', 'Web\MessagesController@index')->name('messages');
     Route::get('create', 'Web\MessagesController@create')->name('messages.create');
     Route::post('/', 'Web\MessagesController@store')->name('messages.store');

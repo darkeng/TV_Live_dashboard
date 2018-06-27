@@ -6,8 +6,8 @@
         </span>
         <div class="chat-body clearfix pull-right">
             <div class="header">
-                <strong class="primary-font">Tu: </strong>
-                <small class=" text-muted">
+                <strong class="primary-font">Tu </strong>
+                <small class="text-muted">
                     <i class="fa fa-clock-o fa-fw"></i>{{ $message->created_at->diffForHumans() }}
                 </small>
             </div>
@@ -23,8 +23,8 @@
         </span>
         <div class="chat-body clearfix pull-left">
             <div class="header">
-                <strong class="primary-font">{{ $message->user->name }}: </strong>
-                <small class="pull-right text-muted">
+                <strong class="primary-font">{{ $message->user->name }} </strong>
+                <small class="text-muted">
                     <i class="fa fa-clock-o fa-fw"></i>{{ $message->created_at->diffForHumans() }}
                 </small>
             </div>

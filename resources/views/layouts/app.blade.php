@@ -163,10 +163,7 @@
                                         <a href="#">Extender suscripcion</a>
                                     </li>
                                     <li>
-                                        <a href="#">Estadisticas</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Todas las lineas</a>
+                                        <a href="#">Administrar lineas</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

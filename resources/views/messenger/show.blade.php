@@ -7,7 +7,7 @@
         <div class="chat-panel panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-comments fa-fw"></i>
-                    {{ $thread->subject }}
+                    <strong>Asunto: </strong>{{ $thread->subject }}
             </div>
             <div class="panel-body">
                 <ul class="chat">
