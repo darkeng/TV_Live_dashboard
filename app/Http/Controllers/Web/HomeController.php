@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Tools\Robot;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,6 +25,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard/index');
+        $smallinfo = json_decode(Robot::GetSmallInfo(), true);
+
+        return view('dashboard.home', ['data' => $smallinfo]);
     }
 }

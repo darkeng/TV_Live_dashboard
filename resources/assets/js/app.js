@@ -47,6 +47,7 @@ const app = new Vue({
 
 $(function () {
     $('#side-menu').metisMenu();
+    $('.selectpicker').selectpicker();
 });
 
 //Loads the correct sidebar on window load,

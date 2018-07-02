@@ -15,14 +15,15 @@ class CreateLinesTable extends Migration
     {
         Schema::create('lines', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('line_id')->nullable();
+            $table->integer('line_id')->unique();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('package_id');
+            $table->integer('package_id')->unsigned()->nullable();
             $table->string('line_type')->default('official');
             $table->string('reseller_notes')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('package_id')->references('package_id')->on('packages')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

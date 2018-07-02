@@ -14,8 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('dist/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/app.css') }}" rel="stylesheet">
     
     <!-- Scripts -->
     <script src="{{ asset('vendor/js/all.js') }}"></script>
@@ -33,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="brand-logo" class="navbar-brand" href="{{ url('/') }}">
+                    <a id="brand-logo" class="navbar-brand" href="{{ route('dashboard.home') }}">
                         <img src="{{ asset('storage/img/logo_nbg.png') }}">
                         <span>{{ config('app.name', 'TV-Live') }}</span>
                     </a>
@@ -46,61 +46,8 @@
                     <!-- /.dropdown -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope fa-fw"></i>
-                            <span>Mensajes</span>
-                            <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>Read All Messages</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                            <span>{{ Auth::user()->name }}</span>
+                            <span>{{ Auth::user()->username }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
@@ -139,8 +86,9 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="{{ route('dashboard.home') }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                             </li>
+                            @role('admin')
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -153,35 +101,24 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            @endrole
                             <li>
                                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Lineas<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Nueva linea</a>
+                                        <a href="{{ route('line.showaddform') }}">Nueva linea</a>
                                     </li>
                                     <li>
-                                        <a href="#">Extender suscripcion</a>
+                                        <a href="{{ route('line.showextendform') }}">Extender suscripcion</a>
                                     </li>
                                     <li>
-                                        <a href="#">Administrar lineas</a>
+                                        <a href="{{ route('line.manage') }}">Administrar lineas</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="{{ route('messages') }}"><i class="fa fa-envelope fa-fw"></i> Mensajes @include('messenger.unread-count')<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="{{ route('messages.create') }}">Nuevo Mensaje</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('messages') }}">Ver mensajes @include('messenger.unread-count')</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
+                                <a href="#"><i class="fa fa-gear fa-fw"></i> Cuenta</a>
                             </li>
                         </ul>
                     </div>
@@ -204,6 +141,6 @@
         <!-- /#page-wrapper -->
 
     </div>
-
+@stack('scripts')
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "TV_Live_dashboard",
+  "name": "tv_dashboard",
   "description": "",
   "main": "",
   "authors": [
@@ -16,7 +16,9 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.7",
+    "bootstrap-select": "~1.12.4",
     "datatables": "~1.10.4",
+    "sweetalert2": "~7.24.4",
     "datatables-plugins": "~1.0.1",
     "flot": "~0.8.3",
     "font-awesome": "~4.6.3",

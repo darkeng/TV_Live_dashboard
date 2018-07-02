@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackageTable extends Migration
+class CreatePackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreatePackageTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('package_id');
+            $table->integer('package_id')->unique()->unsigned();
             $table->string('name');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreatePackageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package');
+        Schema::dropIfExists('packages');
     }
 }

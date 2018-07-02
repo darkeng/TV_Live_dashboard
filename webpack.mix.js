@@ -16,18 +16,22 @@ mix.js('resources/assets/js/app.js', 'public/dist/js')
 
 mix.styles(['bower_components/bootstrap/dist/css/bootstrap.css',
             'bower_components/bootstrap-social/bootstrap-social.css',
+            'bower_components/bootstrap-select/dist/css/bootstrap-select.css',
             'bower_components/metisMenu/dist/metisMenu.css',
             'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css',            
             'bower_components/datatables-responsive/css/dataTables.responsive.css',
-            'bower_components/font-awesome/css/font-awesome.css'
+            'bower_components/font-awesome/css/font-awesome.css',
+            'bower_components/sweetalert2/dist/sweetalert2.css'
 ], 'public/vendor/css/all.css');
 
 mix.scripts(['bower_components/jquery/dist/jquery.js',
             'bower_components/bootstrap/dist/js/bootstrap.js',
+            'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
             'bower_components/metisMenu/dist/metisMenu.js',
             'bower_components/datatables/media/js/jquery.dataTables.min.js',
             'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js', 
-            'bower_components/datatables-responsive/js/dataTables.responsive.js'
+            'bower_components/datatables-responsive/js/dataTables.responsive.js',
+            'bower_components/sweetalert2/dist/sweetalert2.js'
 ], 'public/vendor/js/all.js');
 
 mix.copyDirectory('bower_components/bootstrap/dist/fonts', 'public/vendor/fonts');

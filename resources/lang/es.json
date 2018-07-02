@@ -5,7 +5,7 @@
     "Login": "Acceder",
     "Forgot Your Password?": "¿Olvidaste tu contraseña?",
     "Register": "Registro",
-    "Name": "Nombre",
+    "UserName": "Nombre de usuario",
     "Confirm Password": "Confirmar contraseña",
     "Reset Password": "Reestablecer contraseña",
     "Send Password Reset Link": "Enviar enlace para restablecer contraseña",
@@ -19,5 +19,10 @@
 
     "Reset Password Notification": "Solicitud de cambio de contraseña",
     "You are receiving this email because we received a password reset request for your account.": "Usted está recibiendo este correo electrónico porque recibimos una solicitud de cambio de contraseña para su cuenta.",
-    "If you did not request a password reset, no further action is required.": "Si no solicitó un cambio de contraseña, ignore este mensaje."
+    "If you did not request a password reset, no further action is required.": "Si no solicitó un cambio de contraseña, ignore este mensaje.",
+    "View Details": "Ver Detalles",
+    "Online Users": "Usuarios Activos",
+    "Open Connections": "Conexiones Abiertas",
+    "Average Output": "Ancho de Banda",
+    "Active Subscriptions": "Suscripciones Totales"
 }

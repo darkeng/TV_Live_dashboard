@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,13 +13,14 @@ class User extends Authenticatable
     use Messagable;
     use HasRoleAndPermission;
 
+    Protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'first_name', 'last_name', 'email', 'password', 'phone', 'activated'
+        'name', 'first_name', 'last_name', 'email', 'password', 'phone', 'avatar', 'activated'
     ];
 
     /**
@@ -30,4 +31,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /**
+     * Build line Relationships.
+     *
+     * @var array
+     */
+    public function lines()
+    {
+        return $this->hasMany('App\Models\Line', 'user_id', 'id');
+    }
 }

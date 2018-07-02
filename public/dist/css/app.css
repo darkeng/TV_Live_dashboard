@@ -311,6 +311,24 @@ table.dataTable thead .sorting:after {
   font-size: 40px;
 }
 
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary > .panel-heading {
+  border-color: #428bca;
+  color: white;
+  background-color: #428bca;
+}
+
+.panel-primary > a {
+  color: #428bca;
+}
+
+.panel-primary > a:hover {
+  color: #2a6496;
+}
+
 .panel-green {
   border-color: #5cb85c;
 }
