@@ -42,7 +42,7 @@ Route::prefix('dashboard')->group(function(){
         Route::get('line/{id}/edit', 'Web\LineController@ShowEditForm')->name('line.edit');
         Route::post('line/{id}/update', 'Web\LineController@updateLine')->name('line.update');
         Route::post('line/{id}/delete', 'Web\LineController@deleteLine')->name('line.delete');
-
+        Route::get('package/{id}', 'Web\LineController@getPackageInfo')->name('package.info');
         Route::resource('user', 'Web\UserController');
 
     });

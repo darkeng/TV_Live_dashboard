@@ -13,7 +13,7 @@ class Line extends Model
      *
      * @var array
      */
-    protected $fillable = ['line_id', 'username', 'password', 'package_id', 'line_type', 'reseller_notes', 'user_id'];
+    protected $fillable = ['line_id', 'status', 'username', 'password', 'expire', 'package_id', 'line_type', 'reseller_notes', 'user_id'];
     
     /**
      * A line belongs to a user.

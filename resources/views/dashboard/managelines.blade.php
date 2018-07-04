@@ -17,9 +17,10 @@
                     <table style="width:100%;" class="table table-striped table-bordered table-hover display responsive no-wrap" id="lines-table">
                         <thead>
                             <tr>
+                                <th>Estado</th>
                                 <th>Usuario</th>
                                 <th>Contraseña</th>
-                                <th>Paquete</th>
+                                <th>Expira</th>
                                 <th>Tipo</th>
                                 <th>Notas</th>
                                 <th>Acciones</th>
@@ -28,9 +29,10 @@
                         <tbody>
                             @foreach ($lines as $line)
                                 <tr>
+                                    <td>{!!$line->status!!}</td>
                                     <td>{{$line->username}}</td>
                                     <td>{{$line->password}}</td>
-                                    <td>{{$line->package_id}}</td>
+                                    <td>{!!$line->expire!!}</td>
                                     <td>{{$line->line_type}}</td>
                                     <td>{{$line->reseller_notes}}</td>
                                     <td>

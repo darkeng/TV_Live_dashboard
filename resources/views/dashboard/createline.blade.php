@@ -59,6 +59,15 @@
                                     </div>
                                 @endif
                             </div>
+                            <div class="form-group hidden" id="contains_div">
+                                <label for="package_contains">Informacion del paquete</label>
+                                <textarea id="package_contains" class="form-control" rows="10" readonly></textarea>
+                            </div>
+                            <div class="form-group hidden" id="line_type_div">
+                                <label for="line_type">Tipo de linea</label>
+                                <select name="line_type" id="line_type" class="form-control selectpicker" required>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label" for="reseller_notes">Notas</label>
                                 <textarea rows="5" class="form-control" id="reseller_notes" name="reseller_notes"></textarea>
@@ -73,3 +82,56 @@
     </div>
 
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() { 
+        $('#package_id').change(function () {
+            var package_id = $( "#package_id" ).val();
+            if(package_id!='') {
+                $('#package_contains').empty();
+                $('#line_type').empty();
+                $('#contains_div').addClass('hidden');
+                $('#line_type_div').addClass('hidden');
+                $('input').prop('disabled', true);
+                $('select').prop('disabled', true);
+                $('textarea').prop('disabled', true);
+                $('button').prop('disabled', true);
+                $.ajax({
+                    type: "GET",
+                    dataType: 'JSON',
+                    url: '../package/' + package_id,
+                    success: function (result) {
+                        if( ! jQuery.isEmptyObject( result ) ) {
+                            $('#contains_div').removeClass('hidden');
+                            $.each(result.contains, function (index, value) {
+                                $('#package_contains').text($('#package_contains').text()+value.stream_display_name+"\n");
+                            });
+                            $('#line_type_div').removeClass('hidden');
+                            $('#line_type').append("<option value=''>Elija el tipo de linea</option>");
+                            if(result.is_trial == 1) {
+                                $('#line_type').append("<option value='trial'>Prueba - Creditos: "+result.trial_credits+" - Duracion: "+result.trial_duration+" "+result.trial_duration_in+"</option>");
+                            }
+                            if(result.is_official == 1) {
+                                $('#line_type').append("<option value='official'>Oficial - Creditos: "+result.official_credits+" - Duracion: "+result.official_duration+" "+result.official_duration_in+"</option>");
+                            }
+                            $('.selectpicker').selectpicker('refresh');
+                        }
+                    },
+                    complete: function () {
+                        $('input').prop('disabled', false);
+                        $('select').prop('disabled', false);
+                        $('textarea').prop('disabled', false);
+                        $('button').prop('disabled', false);
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                });
+            } else {
+                $('#package_contains').empty();
+                $('#line_type').empty();
+                $('#contains_div').addClass('hidden');
+                $('#line_type_div').addClass('hidden');
+            }
+        });
+    });
+</script>
+@endpush

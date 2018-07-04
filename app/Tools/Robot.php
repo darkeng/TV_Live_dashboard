@@ -29,7 +29,7 @@ class Robot
 
         "deleteline" => "curl 'https://cms-usa.xtream-codes.com/xce677a7/userpanel/mnglines.php?action=user_delete%s' -H 'authority: cms-usa.xtream-codes.com' -H 'upgrade-insecure-requests: 1' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'referer: https://cms-usa.xtream-codes.com/xce677a7/userpanel/mnglines.php' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: es-NI,es-419;q=0.9,es;q=0.8,en;q=0.7' -H 'cookie: __cfduid=d732ec8433523c4af4583e91aebc239bc1529700615; open_div=StreamingLines; PHPSESSID=58e2227543d15cb3a3222f6def96fc1c' --compressed -s -o /dev/null -w '%%{http_code}'",
 
-        "packageinfo" => "curl 'https://cms-usa.xtream-codes.com/xce677a7/userpanel/add_user.php?action=package_info&id=2' -H 'cookie: __cfduid=d732ec8433523c4af4583e91aebc239bc1529700615; open_div=StreamingLines; PHPSESSID=58e2227543d15cb3a3222f6def96fc1c' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: es-NI,es-419;q=0.9,es;q=0.8,en;q=0.7' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36' -H 'accept: */*' -H 'referer: https://cms-usa.xtream-codes.com/xce677a7/userpanel/add_user.php' -H 'authority: cms-usa.xtream-codes.com' -H 'x-requested-with: XMLHttpRequest' --compressed"
+        "packageinfo" => "curl 'https://cms-usa.xtream-codes.com/xce677a7/userpanel/add_user.php?action=package_info&%s' -H 'cookie: __cfduid=d732ec8433523c4af4583e91aebc239bc1529700615; open_div=StreamingLines; PHPSESSID=58e2227543d15cb3a3222f6def96fc1c' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: es-NI,es-419;q=0.9,es;q=0.8,en;q=0.7' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36' -H 'accept: */*' -H 'referer: https://cms-usa.xtream-codes.com/xce677a7/userpanel/add_user.php' -H 'authority: cms-usa.xtream-codes.com' -H 'x-requested-with: XMLHttpRequest' --compressed"
     ];
     
     public static function GetSmallInfo()
@@ -39,11 +39,11 @@ class Robot
         if(self::VerifySession())
         {
             $output=self::ExecuteCommand($command, null);
+            return $output;
         }
         else {
-            $output= json_encode(['error' => 'Se ha producido un error!']);
+            return false;
         }
-        return $output;
     }
 
     public static function GetAllLines()
@@ -53,37 +53,67 @@ class Robot
         if(self::VerifySession())
         {
             $output=self::ExecuteCommand($command, null);
+            return $output;
         }
         else {
-            $output= json_encode(['error' => 'Se ha producido un error!']);
+            return false;
         }
-        return $output;
     }
 
-    public static function GetLineIdByName($name)
+    public static function GetLineByName($name)
     {
-        $lines=json_decode(self::GetAllLines(), true);
-        foreach ($lines['records'] as $line) {
-            if($line['username']==$name)
+        $alllines = self::GetAllLines();
+        if(!$alllines)
+        {
+            $lines=json_decode($alllines, true);
+            foreach ($lines['records'] as $line)
             {
-                $subject=$line['download'];
-                $pattern = '/user_id=[0-9]*/';
-                $matches=NULL;
-                if(preg_match($pattern, $subject, $matches))
+                if($line['username']==$name)
                 {
-                    return substr($matches[0], 8);;
-                }
-                else {
-                    return false;
+                    $subject=$line['download'];
+                    $pattern = '/user_id=[0-9]*/';
+                    $matches=NULL;
+                    if(preg_match($pattern, $subject, $matches))
+                    {
+                        $outLine=[
+                            'line_id' => substr($matches[0], 8),
+                            'status' => $line['status'],
+                            'username' => $line['username'],
+                            'password' => $line['password'],
+                            'expire' => $line['expire'],
+                            'reseller_notes' => $line['notes']
+                        ];
+                        return $outLine;
+                    }
+                    else {
+                        return false;
+                    }
                 }
             }
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static function GetPackageInfo($id)
+    {
+        $command=self::$commandsFormats['packageinfo'];
+        $output="";
+        if(self::VerifySession())
+        {
+            $output=self::ExecuteCommand($command, 'id='.$id);
+            return $output;
+        }
+        else {
+            return false;
         }
     }
     
     public static function AddLine($data)
     {
         $command=self::$commandsFormats['addline'];
-        $strdata="username=".urlencode($data['username'])."&password=".urlencode($data['password'])."&package_id=".urlencode($data['package_id'])."&line_type=official&reseller_notes=".urlencode($data['reseller_notes']);
+        $strdata="username=".urlencode($data['username'])."&password=".urlencode($data['password'])."&package_id=".urlencode($data['package_id'])."&line_type=".urlencode($data['line_type'])."&reseller_notes=".urlencode($data['reseller_notes']);
         if(self::VerifySession())
         {
             $output=self::ExecuteCommand($command, $strdata);
@@ -103,7 +133,7 @@ class Robot
     public static function ExtendLine($data)
     {
         $command=self::$commandsFormats['extendline'];
-        $strdata="user_id=".urlencode($data['line_id'])."&package_id=".urlencode($data['package_id'])."&line_type=official";
+        $strdata="user_id=".urlencode($data['line_id'])."&package_id=".urlencode($data['package_id'])."&line_type=".urlencode($data['line_type']);
         if(self::VerifySession())
         {
             $output=self::ExecuteCommand($command, $strdata);
