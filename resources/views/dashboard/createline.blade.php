@@ -29,7 +29,7 @@
                         <fieldset>
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label class="control-label" for="username">Nombre de Usuario</label>
-                                <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}" placeholder="Nombre de usuario" min="6" required>
+                                <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}" placeholder="Nombre de usuario" minlength="6" required>
                                 @if ($errors->has('username'))
                                     <div class="text-danger" role="alert">
                                         {{ $errors->first('username') }}
@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label class="control-label" for="password">Contraseña</label>
-                                <input type="text" class="form-control" id="password" name="password" value="{{old('password')}}" placeholder="Contraseña" min="6" required>
+                                <input type="text" class="form-control" id="password" name="password" value="{{old('password')}}" placeholder="Contraseña" minlength="6" required>
                                 @if ($errors->has('password'))
                                     <div class="text-danger" role="alert">
                                         {{ $errors->first('password') }}

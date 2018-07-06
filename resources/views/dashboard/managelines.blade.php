@@ -38,9 +38,9 @@
                                     <td>
                                         <div class="text-center">
                                             <a href="{{route('line.edit', ['id'=>$line->id])}}">
-                                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>
+                                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Editar Linea"></i></button>
                                             </a>
-                                            <button type="button" onclick="lineDelete({{$line->id}})" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
+                                            <button type="button" onclick="lineDelete({{$line->id}})" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="right" title="Eliminar Linea"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -56,6 +56,9 @@
 @endsection
 @push('scripts')
     <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         $(function() {
             $('#lines-table').DataTable({
                 language: {
@@ -86,7 +89,7 @@
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             swal({
                 title: 'Estas seguro?',
-                text: "Esta accion es irevesible!",
+                text: "Esta accion no se puede deshacer!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#428bca',
@@ -97,7 +100,7 @@
                     if (result.value) {
                         $.ajax({
                             url: +id+"/delete",
-                            type: 'POST',
+                            type: 'DELETE',
                             data: {_token: CSRF_TOKEN},
                             dataType: 'JSON',
                             success: function(result) {
@@ -113,7 +116,9 @@
                                     'Hecho!',
                                     result['message'],
                                     'success'
-                                    );
+                                    ).then((result) => {
+                                        window.location.href = "{{route('line.manage')}}";
+                                    });
                                 }
                             },
                             error: function(rest){
@@ -124,7 +129,6 @@
                                     );
                             }
                         });
-                        location.reload();
                     }
                 });
         }

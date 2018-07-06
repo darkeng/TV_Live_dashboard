@@ -25,6 +25,8 @@ mix.styles(['bower_components/bootstrap/dist/css/bootstrap.css',
 ], 'public/vendor/css/all.css');
 
 mix.scripts(['bower_components/jquery/dist/jquery.js',
+            'bower_components/jquery-validation/dist/jquery.validate.js',
+            'bower_components/jquery-validation/src/localization/messages_es.js',
             'bower_components/bootstrap/dist/js/bootstrap.js',
             'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
             'bower_components/metisMenu/dist/metisMenu.js',

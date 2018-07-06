@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'TV Live Dashboard'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Mexico_City',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,8 @@ return [
 
         jeremykenedy\LaravelRoles\RolesServiceProvider::class,
 
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -226,7 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'SSH' => Collective\Remote\RemoteFacade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];

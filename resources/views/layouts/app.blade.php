@@ -50,11 +50,11 @@
                             <span>{{ Auth::user()->username }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
+                            @if(Auth::user()->isActivated())
+                            <li><a href="{{route('user.show', ['id'=>Auth::user()->id])}}"><i class="fa fa-user fa-fw"></i> Cuenta</a>
                             </li>
                             <li class="divider"></li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fa fa-sign-out fa-fw"></i> {{ __('Logout') }}
@@ -71,6 +71,7 @@
                 </ul>
                 <!-- /.navbar-top-links -->
                 @auth
+                @if(Auth::user()->isActivated())
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
@@ -93,10 +94,10 @@
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Nuevo usuario</a>
+                                        <a href="{{ route('user.create') }}">Nuevo usuario</a>
                                     </li>
                                     <li>
-                                        <a href="#">Todos los usuarios</a>
+                                        <a href="{{ route('user.index') }}">Todos los usuarios</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -118,20 +119,25 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-gear fa-fw"></i> Cuenta</a>
+                                <a href="{{route('user.show', ['id'=>Auth::user()->id])}}"><i class="fa fa-user fa-fw"></i> Cuenta</a>
                             </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
                 </div>
                 <!-- /.navbar-static-side -->
+                @endif
                 @endauth
         </nav>
         <!-- /.navbar-static-top -->
 
         <!-- Page Content -->
         @auth
-        <div id="page-wrapper">
+            @if(Auth::user()->isActivated())
+                <div id="page-wrapper">
+            @else
+                <div class="container-fluid">
+            @endif
         @else
         <div class="container-fluid">
         @endauth
@@ -141,6 +147,7 @@
         <!-- /#page-wrapper -->
 
     </div>
+    
 @stack('scripts')
 </body>
 </html>

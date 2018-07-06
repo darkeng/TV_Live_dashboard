@@ -27,12 +27,15 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::get('firstLogin', 'Web\UserController@showChangePassword')->name('user.changepasswordform');
+Route::post('changepass', 'Web\UserController@changePassword')->name('user.changepassword');
+
+Route::get('confirmemail/{token}', 'Web\UserController@confirmEmail')->name('user.confirmemail');
+
 Route::prefix('dashboard')->group(function(){
-    Route::middleware(['auth'])->group(function(){
+    Route::middleware(['auth', 'activated'])->group(function(){
         Route::get('/', 'Web\HomeController@index')->name('dashboard');
         Route::get('/home', 'Web\HomeController@index')->name('dashboard.home');
-
-        //Route::get('createline', 'Web\LineController@create')->name('line.create');
         
         Route::get('line/extend', 'Web\LineController@ShowExtendForm')->name('line.showextendform');
         Route::post('line/extending', 'Web\LineController@extend')->name('line.extending');
@@ -41,8 +44,13 @@ Route::prefix('dashboard')->group(function(){
         Route::post('line/store', 'Web\LineController@storeLine')->name('line.store');
         Route::get('line/{id}/edit', 'Web\LineController@ShowEditForm')->name('line.edit');
         Route::post('line/{id}/update', 'Web\LineController@updateLine')->name('line.update');
-        Route::post('line/{id}/delete', 'Web\LineController@deleteLine')->name('line.delete');
+        Route::delete('line/{id}/delete', 'Web\LineController@deleteLine')->name('line.delete');
+
         Route::get('package/{id}', 'Web\LineController@getPackageInfo')->name('package.info');
+
+        Route::put('user/{id}/resetpass', 'Web\UserController@resetPassword')->name('user.resetpass');
+        Route::get('user/{id}/sendconfirm', 'Web\UserController@sendConfirmEmail')->name('user.sendconfirm');
+
         Route::resource('user', 'Web\UserController');
 
     });

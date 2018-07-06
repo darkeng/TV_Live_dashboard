@@ -4,14 +4,14 @@
 
     <div class="row">
         <div class="col-lg-12">
-                <h1 class="page-header">Crear Nueva Linea</h1>
+                <h1 class="page-header">Editar Linea</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Datos para la nueva linea
+                    Nevos datos para la linea <strong>{{$line->username}}</strong>
                 </div>
                 <div class="panel-body">
                     @if (session('status'))
@@ -29,7 +29,7 @@
                         <fieldset>
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label class="control-label" for="password">Contraseña</label>
-                                <input type="text" class="form-control" id="password" name="password" value="{{$line->password}}" placeholder="Contraseña" min="6" required>
+                                <input type="text" class="form-control" id="password" name="password" value="{{$line->password}}" placeholder="Contraseña" minlength="6" required>
                                 @if ($errors->has('password'))
                                     <div class="text-danger" role="alert">
                                         {{ $errors->first('password') }}
@@ -38,9 +38,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="reseller_notes">Notas</label>
-                                <textarea rows="5" class="form-control" id="reseller_notes" name="reseller_notes">
-                                    {{$line->reseller_notes}}
-                                </textarea>
+                                <textarea rows="5" class="form-control" id="reseller_notes" name="reseller_notes">{{$line->reseller_notes}}</textarea>
                             </div>
                             
                             <button type="submit" class="btn btn-primary">Actualizar Linea</button>

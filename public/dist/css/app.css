@@ -158,6 +158,18 @@
   }
 }
 
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin: 20px 10px;
+}
+
+.btn.btn-tooltip {
+  padding: 1px 4px;
+}
+
 .btn-outline {
   color: inherit;
   background-color: transparent;

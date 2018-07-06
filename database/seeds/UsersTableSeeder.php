@@ -27,9 +27,9 @@ class UsersTableSeeder extends Seeder
                 'last_name'                      => $faker->lastName,
                 'email'                          => $seededAdminEmail,
                 'password'                       => Hash::make('password'),
-                'phone'                          => $faker->e164PhoneNumber,
                 'avatar'                          => '/storage/img/profiles/default/avatar.jpg',
-                'activated'                      => true
+                'activated'                      => true,
+                'confirmed'                      => true
             ]);
 
             $user->attachRole($adminRole);
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
         }
         
         // Seed test user
-        $seededUserEmail = 'user@user.com';
+        $seededUserEmail = 'engellmejia6@gmail.com';
         $user = User::where('email', '=', $seededUserEmail)->first();
         if ($user === null) {
             $user = User::create([
@@ -46,9 +46,9 @@ class UsersTableSeeder extends Seeder
                 'last_name'                      => $faker->lastName,
                 'email'                          => $seededUserEmail,
                 'password'                       => Hash::make('password'),
-                'phone'                          => $faker->e164PhoneNumber,
                 'avatar'                          => '/storage/img/profiles/default/avatar.jpg',
-                'activated'                      => true
+                'activated'                      => true,
+                'confirmed'                      => true
             ]);
 
             $user->attachRole($userRole);

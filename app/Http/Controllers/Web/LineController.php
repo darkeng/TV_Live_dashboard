@@ -91,7 +91,14 @@ class LineController extends Controller
 
     public function ShowEditForm($idLine)
     {
-        $line=Auth::user()->lines()->find($idLine);
+        $line=NULL;
+        if(Auth::user()->isAdmin())
+        {
+            $line=Line::all()->find($idLine);
+        } else 
+        {
+            $line=Auth::user()->lines()->find($idLine);
+        }
         return view('dashboard.editline', ['line' => $line]);
     }
 
@@ -104,8 +111,14 @@ class LineController extends Controller
                 'reseller_notes' => ''
             ]
         )->validate();
-
-        $line=Auth::user()->lines()->find($idLine);
+        $line=NULL;
+        if(Auth::user()->isAdmin())
+        {
+            $line=Line::all()->find($idLine);
+        } else 
+        {
+            $line=Auth::user()->lines()->find($idLine);
+        }
 
         $data=[
             'line_id' => $line->line_id,
@@ -126,7 +139,14 @@ class LineController extends Controller
 
     public function ShowExtendform()
     {
-        $lines=Auth::user()->lines()->get();
+        $lines=NULL;
+        if(Auth::user()->isAdmin())
+        {
+            $lines=Line::all();
+        } else 
+        {
+            $lines=Auth::user()->lines()->get();
+        }
         $packages = Package::all();
         return view('dashboard.extendline', ['lines' => $lines, 'packages' => $packages]);
     }

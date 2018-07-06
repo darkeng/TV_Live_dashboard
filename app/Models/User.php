@@ -6,12 +6,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cmgmyr\Messenger\Traits\Messagable;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
+use App\Traits\DatesTranslator;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use Messagable;
     use HasRoleAndPermission;
+    use DatesTranslator;
 
     Protected $table = 'users';
     /**
@@ -20,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'first_name', 'last_name', 'email', 'password', 'phone', 'avatar', 'activated'
+        'username', 'first_name', 'last_name', 'email', 'password', 'temp_password', 'avatar', 'activated', 'confirmed'
     ];
 
     /**
@@ -40,5 +42,14 @@ class User extends Authenticatable
     public function lines()
     {
         return $this->hasMany('App\Models\Line', 'user_id', 'id');
+    }
+
+    public function isActivated()
+    {
+        return $this->activated;
+    }
+    public function isConfirmed()
+    {
+        return $this->confirmed;
     }
 }
