@@ -44,7 +44,7 @@
                                     </p>
                                     <p>
                                         @if($difusers)
-                                        <button class="btn btn-info" role="button">Cambiar Imagen</button>
+                                        <button class="btn btn-info" role="button" disabled>Cambiar Imagen</button>
                                         @endif
                                     </p>
                                 </div>

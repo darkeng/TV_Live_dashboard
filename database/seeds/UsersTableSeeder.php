@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
         }
         
         // Seed test user
-        $seededUserEmail = 'engellmejia6@gmail.com';
+        $seededUserEmail = 'user@user.com';
         $user = User::where('email', '=', $seededUserEmail)->first();
         if ($user === null) {
             $user = User::create([

@@ -44,10 +44,10 @@ class PackageTableSeeder extends Seeder
         $count=0;
         while ($count < count($packages))
         {
-            if(Package::where('package_id', '=', $packages[$count]['id'])->first() === null)
+            if(Package::where('id', '=', $packages[$count]['id'])->first() === null)
             {
                 Package::create([
-                    'package_id' => $packages[$count]['id'],
+                    'id' => $packages[$count]['id'],
                     'name' => $packages[$count]['name']
                 ]);
 

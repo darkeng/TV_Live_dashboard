@@ -39,7 +39,13 @@ class LineController extends Controller
 
     public function ShowAddForm()
     {
-        $packages = Package::all();
+        $packages=NULL;
+        if(Auth::user()->isAdmin())
+        {
+            $packages = Package::all();
+        }else {
+            $packages = Package::find([2, 3, 19, 20]);
+        }
         return view('dashboard.createline', ['packages' => $packages]);
     }
 
@@ -139,15 +145,17 @@ class LineController extends Controller
 
     public function ShowExtendform()
     {
+        $packages=NULL;
         $lines=NULL;
         if(Auth::user()->isAdmin())
         {
             $lines=Line::all();
+            $packages = Package::all();
         } else 
         {
             $lines=Auth::user()->lines()->get();
+            $packages = Package::find([2, 3, 19, 20]);
         }
-        $packages = Package::all();
         return view('dashboard.extendline', ['lines' => $lines, 'packages' => $packages]);
     }
 

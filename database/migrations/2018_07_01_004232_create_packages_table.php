@@ -14,8 +14,8 @@ class CreatePackagesTable extends Migration
     public function up()
     {
         Schema::create('packages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('package_id')->unique()->unsigned();
+            $table->integer('id')->unsigned();
+            $table->primary('id');
             $table->string('name');
             $table->timestamps();
         });

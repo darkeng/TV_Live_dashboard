@@ -66,6 +66,8 @@
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
+                    @else
+                    <li><a href="#"><i class="fa fa-android"></i> Descargar APK</a></li>
                     @endauth
                     <!-- /.dropdown -->
                 </ul>

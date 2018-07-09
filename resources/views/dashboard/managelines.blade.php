@@ -21,7 +21,9 @@
                                 <th>Usuario</th>
                                 <th>Contraseña</th>
                                 <th>Expira</th>
-                                <th>Tipo</th>
+                                @role('admin')
+                                <th>Vendedor</th>
+                                @endrole
                                 <th>Notas</th>
                                 <th>Acciones</th>
                             </tr>
@@ -33,14 +35,22 @@
                                     <td>{{$line->username}}</td>
                                     <td>{{$line->password}}</td>
                                     <td>{!!$line->expire!!}</td>
-                                    <td>{{$line->line_type}}</td>
+                                    @role('admin')
+                                    @if(!$line->user()->get()->isEmpty())
+                                    <td>{{$line->user()->first()->username}}</td>
+                                    @else
+                                    <td>Ninguno</td>
+                                    @endif
+                                    @endrole
                                     <td>{{$line->reseller_notes}}</td>
                                     <td>
                                         <div class="text-center">
                                             <a href="{{route('line.edit', ['id'=>$line->id])}}">
                                                 <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Editar Linea"></i></button>
                                             </a>
-                                            <button type="button" onclick="lineDelete({{$line->id}})" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="right" title="Eliminar Linea"><i class="fa fa-trash"></i></button>
+                                            @role('admin')
+                                                <button type="button" onclick="lineDelete({{$line->id}})" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="right" title="Eliminar Linea"><i class="fa fa-trash"></i></button>
+                                                @endrole
                                         </div>
                                     </td>
                                 </tr>

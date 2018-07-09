@@ -31,6 +31,8 @@ Route::get('firstLogin', 'Web\UserController@showChangePassword')->name('user.ch
 Route::post('changepass', 'Web\UserController@changePassword')->name('user.changepassword');
 
 Route::get('confirmemail/{token}', 'Web\UserController@confirmEmail')->name('user.confirmemail');
+Route::get('download', 'IndexController@ShowDowloadForm')->name('downloadapkform');
+Route::post('download', 'IndexController@DowloadAPK')->name('downloadapk');
 
 Route::prefix('dashboard')->group(function(){
     Route::middleware(['auth', 'activated'])->group(function(){

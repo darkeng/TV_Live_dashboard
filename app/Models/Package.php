@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     protected $table = 'packages';
-
+    public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'package_id', 'name'
+        'id', 'name'
     ];
     
     /**
@@ -24,6 +24,6 @@ class Package extends Model
      */
     public function lines()
     {
-        return $this->belongsToMany('App\Models\Line', 'package_id', 'package_id');
+        return $this->belongsToMany('App\Models\Line', 'package_id', 'id');
     }
 }

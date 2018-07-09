@@ -46,7 +46,7 @@
                                 <select name="package_id" id="package_id" class="form-control selectpicker" required>
                                     <option value="">Seleccione un paquete</option>
                                     @foreach ($packages as $package)
-                                        <option value="{{$package->package_id}}"> {{$package->name}} </option>
+                                        <option value="{{$package->id}}"> {{$package->name}} </option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('package_id'))

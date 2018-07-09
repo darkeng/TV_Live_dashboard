@@ -22,7 +22,7 @@ class Line extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'id', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
     /**
@@ -32,6 +32,6 @@ class Line extends Model
      */
     public function package()
     {
-        return $this->hasOne('App\Models\Package', 'package_id', 'package_id');
+        return $this->hasOne('App\Models\Package', 'package_id', 'id');
     }
 }

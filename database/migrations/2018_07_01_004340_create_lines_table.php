@@ -24,7 +24,7 @@ class CreateLinesTable extends Migration
             $table->string('line_type');
             $table->string('reseller_notes')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('package_id')->references('package_id')->on('packages')->onDelete('set null');
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
